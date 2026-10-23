@@ -1,0 +1,10 @@
+project_id = "holiday-radar"
+
+[functions.subscribe]
+verify_jwt = true
+
+[functions.confirm]
+verify_jwt = true
+
+[functions.manage]
+verify_jwt = true

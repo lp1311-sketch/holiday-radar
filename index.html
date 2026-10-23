@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="hr"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self' https://*.supabase.co; img-src 'self' data:; base-uri 'self'; form-action 'self'; object-src 'none'; frame-ancestors 'none'">
+<title>Holiday Radar — pronađi sljedeći odmor</title><link rel="stylesheet" href="styles.css"><script src="config.js"></script><script src="app.js" defer></script></head>
+<body><header class="topbar"><a class="brand" href="#top"><span class="mark">HR</span> Holiday Radar</a><span class="top-note">Javni izvori · za svakoga</span></header>
+<main id="top"><section class="intro"><p class="eyebrow">BESPLATNO · OTVORENO · PERSONALIZIRANO</p><h1>Pronađi putovanje<br><em>koje odgovara tebi.</em></h1><p class="lede">Postavi kriterije i dobit ćeš e-mail kada javni izvori pronađu novi mogući pogodak. Ti odlučuješ što ti odgovara — ovo nije rezervacijski servis.</p><p class="trust"><i></i> Pronađeni rezultati su tragovi za provjeru, ne potvrđene ponude.</p></section>
+<div id="confirm-panel" class="notice success" hidden role="status" aria-live="polite"></div><div id="error-panel" class="notice error" hidden role="alert"></div><div id="config-warning" class="notice warning" hidden></div>
+<section class="layout"><form id="subscription-form" class="form-card" novalidate>
+<div class="form-heading"><div><p class="eyebrow">TVOJ RADAR</p><h2>Što tražimo?</h2></div><span class="step">FILTERI · E-MAIL · POTVRDA</span></div>
+<fieldset><legend><b>01</b> Destinacija i termini</legend><div class="grid">
+<label class="wide">Mjesta ili regije <small>Odvoji zarezima — npr. Istra, Sardinija</small><input name="destinations" maxlength="240" required placeholder="npr. Istra, jezero Garda"></label>
+<label>Države <small>Odvoji zarezima</small><input name="countries" maxlength="240" placeholder="npr. Hrvatska, Italija"></label>
+<label>Polazište <small>Neobavezno</small><input name="origin" maxlength="120" placeholder="grad ili poštanski broj"></label>
+<label>Dolazak od<input name="date_from" type="date"></label><label>Dolazak do<input name="date_to" type="date"></label>
+<label>Noćenja — najmanje<input name="nights_min" type="number" min="1" max="90" placeholder="npr. 5"></label><label>Noćenja — najviše<input name="nights_max" type="number" min="1" max="90" placeholder="npr. 10"></label>
+<label class="check wide"><input name="date_flexible" type="checkbox"><span>Datumi su fleksibilni</span></label></div></fieldset>
+<fieldset><legend><b>02</b> Putnici i budžet</legend><div class="grid">
+<label>Odrasli<input name="adults" type="number" min="1" max="20" value="2" required></label>
+<label>Dob djece <small>Odvoji zarezima; prazno ako nema djece</small><input name="children_ages" maxlength="80" placeholder="npr. 4, 9"></label>
+<label>Sobe<input name="rooms" type="number" min="1" max="10" value="1"></label>
+<label>Maksimalni ukupni budžet <small>Za cijelo putovanje, ako je poznat</small><input name="budget" type="number" min="0" step="1" placeholder="npr. 1500"></label>
+<label>Valuta<select name="currency"><option>EUR</option><option>USD</option><option>GBP</option><option>CHF</option><option>CAD</option><option>AUD</option></select></label>
+<label>Najveća udaljenost (km) <small>Smjernica, nije izračun rute</small><input name="max_distance_km" type="number" min="1" max="20000" placeholder="npr. 500"></label></div></fieldset>
+<fieldset><legend><b>03</b> Smještaj i uvjeti</legend><div class="grid">
+<label>Vrsta smještaja<select name="accommodation"><option value="any">Bilo koja</option><option value="hotel">Hotel</option><option value="apartment">Apartman</option><option value="camping">Kamp</option><option value="resort">Resort</option><option value="holiday_home">Kuća za odmor</option></select></label>
+<label>Prehrana<select name="meal_plan"><option value="any">Nije važno</option><option value="breakfast">Doručak</option><option value="half_board">Polupansion</option><option value="full_board">Puni pansion</option><option value="all_inclusive">All-inclusive</option><option value="self_catering">Bez prehrane / kuhinja</option></select></label>
+<label>Minimalna ocjena <small>Ako je navedena</small><select name="min_rating"><option value="0">Nije važno</option><option value="7">7+</option><option value="8">8+</option><option value="9">9+</option></select></label>
+<label>Najmanje recenzija <small>Ako je navedeno</small><input name="min_reviews" type="number" min="0" placeholder="Nije važno"></label>
+<label class="check wide"><input name="free_cancellation" type="checkbox"><span>Preferiram besplatno otkazivanje</span></label>
+<label class="wide">Sadržaji ili ključne riječi <small>Odvoji zarezima — npr. bazen, blizu plaže, parking</small><input name="features" maxlength="300" placeholder="Nije obavezno"></label></div></fieldset>
+<fieldset><legend><b>04</b> Obavijesti</legend><div class="grid">
+<label class="wide">E-mail za potvrdu i obavijesti<input name="email" type="email" autocomplete="email" maxlength="254" required placeholder="ime@primjer.com"></label>
+<label class="wide">Učestalost<select name="frequency_hours"><option value="6">Otprilike svakih 6 sati</option><option value="12">Otprilike svakih 12 sati</option><option value="24" selected>Jednom dnevno</option></select></label></div>
+<p class="privacy">E-mail služi samo za potvrdu i tražene obavijesti. Pretplata se aktivira tek nakon potvrde. Odjava je dostupna u svakoj poruci.</p></fieldset>
+<div class="actions"><button class="button primary" id="submit-button" type="submit">Pokreni moj radar <span>↗</span></button><p id="form-status" role="status" aria-live="polite"></p></div>
+<div id="manage-actions" class="manage-actions" hidden><button class="button primary" id="save-button" type="button">Spremi promjene</button><button class="button danger" id="unsubscribe-button" type="button">Odjavi obavijesti</button></div>
+</form><aside class="side">
+<section class="side-card dark"><p class="eyebrow">KAKO RADI</p><ol><li><b>Postavi kriterije</b><p>Destinacija, datumi, putnici i želje.</p></li><li><b>Potvrdi e-mail</b><p>Aktivacija preko privatne poveznice.</p></li><li><b>Provjeri tragove</b><p>Poruka s izvornom poveznicom kad se nađe mogući pogodak.</p></li></ol></section>
+<section class="side-card"><p class="eyebrow">ISKRENO O PODACIMA</p><h3>Pronalazak nije potvrda.</h3><p>Pretražujemo lokalizirane Google News i Bing RSS rezultate te javne uredničke feedove Travelzoo i Travel-Dealz, izdvajamo izdavača i datum objave i uklanjamo dio duplikata. Oznaka jačine traga govori koliko pokazatelja imamo — nije potvrda. RSS nije inventar soba. Destinacija, vrsta, prehrana i sadržaji utječu na pretragu; budžet, termini, ocjene, otkazivanje i udaljenost nisu pouzdano provjerljivi RSS-om. Sve uvjete i cijenu provjeri na izvoru.</p><div class="tags"><span>Javni RSS</span><span>Bez API naknade</span><span>Bez plaćenog AI-ja</span></div></section>
+<section class="side-card note"><b>↗</b><p>Bez računa. Bez naknade. Postavke uređuješ privatnom poveznicom u e-mailu.</p></section></aside></section>
+<footer><span>HOLIDAY RADAR · OPEN-SOURCE STARTER</span><span>GitHub Pages + Supabase + Actions</span></footer></main></body></html>
